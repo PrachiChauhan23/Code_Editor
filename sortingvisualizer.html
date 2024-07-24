@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/sortingvisualizer_style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Sorting Visualizer</title>
+</head>
+
+<body>
+    <nav class="navbar background h-nav-resp">
+        <ul class="nav-list v-class-resp">
+            <div class="logo"><img src="./styles/imgs/logo.png" alt="logo"></div>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="code_editor.html">Code Editor</a></li>
+            <li><a href="#">Sorting Visualizer</a></li>
+            <li><a href="https://prachichauhan23.github.io/portfolio-prachi/" target="_blank">About</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="bars_container" id="bars_container"></div>
+
+        <div class="buttons_container">
+            <!-- <label for="slider">Array Size:</label> -->
+            <input type="range" id="slider" min="40" max="90" step="5" value="40" />
+
+            <select name="" id="speed">
+                <option value="400">Slow</option>
+                <option value="150">Medium</option>
+                <option value="60">Fast</option>
+            </select>
+            <select name="" id="algo">
+                <option value="bubble">Bubble Sort</option>
+                <option value="insertion">Insertion Sort</option>
+                <option value="heap">Heap Sort</option>
+                <option value="merge">Merge Sort</option>
+                <option value="quick">Quick Sort</option>
+            </select>
+            <button id="randomize_array_btn">Randomize Array</button>
+            <button id="sort_btn">Sort</button>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; Prachi Chauhan. All rights reserved.</p>
+        <ul class="social-icons">
+            <li><a href="#" class="fab fa-linkedin"></a></li>
+            <li><a href="#" class="fab fa-github"></a></li>
+            <li><a href="#" class="fab fa-instagram"></a></li>
+        </ul>
+    </footer>
+  <script src="./styles/sortingvisualizer_index.js"></script>
+</body>
+
+</html>

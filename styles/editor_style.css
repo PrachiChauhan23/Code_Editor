@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif ;
+    box-sizing: border-box;
+}
+body {
+    background-color: #04045894;
+    color: #fff;
+}
+.logo {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    width: 26%;
+    border-radius: 50%;
+    border: 3px solid white;
+    margin: 5px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    cursor: pointer;
+    background: blue;
+}
+
+.nav-list {
+    width: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-list li {
+    list-style: none;
+    transition: transform 1s ease;
+    padding: 30px;
+    transform: scale(1);
+}
+
+.nav-list li:hover {
+    transform: scale(1.05);
+}
+
+.nav-list li a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+}
+
+.nav-list li a:hover {
+    color: rgb(234, 206, 206);
+}
+
+.background {
+    background-image: url('imgs/bg1.jpeg');
+    background-size: cover;
+    background-blend-mode: darken;
+}
+
+.main-container {
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+}
+.left, .right {
+    flex-basis: 50%;
+    padding: 10px;
+
+}
+textarea {
+    width: 100%;
+    height: 28%;
+    background: #044969;
+    color: #fff;
+    padding: 10px 20px;
+    border: 0;
+    outline: 0;
+    font-size: 20px;
+}
+
+iframe {
+    width: 100%;
+    height: 95%;
+    background: #efefef;
+    border: 0;
+    outline: 0;
+}
+label i {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+label {
+    display: flex;
+    align-items: center;
+    background: #000;
+    height: 30px;
+}
+
+footer {
+    background-color: #372b2bd3;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer p {
+    margin: 0;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+}
+
+.social-icons li {
+    margin: 0 10px;
+}
+
+.social-icons a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #3498db;
+}
