@@ -86,7 +86,6 @@ async function bubbleSort(array) {
         await sleep(speedFactor);
     }
     resetArrayColor(array);
-    return array;
 }
 
 //INSERTION SORT
@@ -113,8 +112,185 @@ async function InsertionSort(array) {
         await sleep(speedFactor);
     }
     resetArrayColor(array);
-    return array;
 }
+
+//SELECTION SORT
+async function SelectionSort(array){
+    let bars = document.getElementsByClassName("bar");
+    for(let i=0;i<array.length;i++){
+        let minIdx=i;
+        for(let j=i+1;j<array.length;j++){
+            for (let k = 0; k < bars.length; k++) {
+                if (k != minIdx) {
+                    bars[k].style.backgroundColor = "rgb(218, 206, 199)";
+                }
+            }
+            if(array[minIdx]>array[j]){
+                minIdx=j;
+            }
+            bars[minIdx].style.backgroundColor = "lightgreen";
+            await sleep(speedFactor);
+            
+        }
+        let temp=array[minIdx];
+        array[minIdx]=array[i];
+        array[i]=temp;
+        bars[i].style.height = array[i] * heightFactor + "px";
+        bars[i].style.backgroundColor = "yellow";
+        bars[minIdx].style.height = array[minIdx] * heightFactor + "px";
+        bars[minIdx].style.backgroundColor = "lightgreen";
+        await sleep(speedFactor);
+    }
+    resetArrayColor(array);
+}
+
+
+//MERGE SORT
+async function merge(array, left, middle, right) {
+    let bars = document.getElementsByClassName("bar");
+    let leftArray = array.slice(left, middle + 1);
+    let rightArray = array.slice(middle + 1, right + 1);
+
+    let i = 0;
+    let j = 0;
+    let k = left;
+
+    // Highlight the two halves being merged
+    for (let idx = left; idx <= middle; idx++) {
+        bars[idx].style.backgroundColor = "lightblue"; // Left half
+    }
+    for (let idx = middle + 1; idx <= right; idx++) {
+        bars[idx].style.backgroundColor = "lightcoral"; // Right half
+    }
+    await sleep(speedFactor);
+
+    while (i < leftArray.length && j < rightArray.length) {
+        if (leftArray[i] <= rightArray[j]) {
+            array[k] = leftArray[i];
+            bars[k].style.height = array[k] * heightFactor + "px";
+            bars[k].style.backgroundColor = "orange"; // Merging elements
+            i++;
+        } else {
+            array[k] = rightArray[j];
+            bars[k].style.height = array[k] * heightFactor + "px";
+            bars[k].style.backgroundColor = "orange"; // Merging elements
+            j++;
+        }
+        await sleep(speedFactor);
+        bars[k].style.backgroundColor = "rgb(218, 206, 199)"; // Reset to default color
+        k++;
+    }
+
+    // Copy remaining elements of leftArray, if any
+    while (i < leftArray.length) {
+        array[k] = leftArray[i];
+        bars[k].style.height = array[k] * heightFactor + "px";
+        bars[k].style.backgroundColor = "orange"; // Merging elements
+        await sleep(speedFactor);
+        bars[k].style.backgroundColor = "rgb(218, 206, 199)"; // Reset to default color
+        i++;
+        k++;
+    }
+
+    // Copy remaining elements of rightArray, if any
+    while (j < rightArray.length) {
+        array[k] = rightArray[j];
+        bars[k].style.height = array[k] * heightFactor + "px";
+        bars[k].style.backgroundColor = "orange"; // Merging elements
+        await sleep(speedFactor);
+        bars[k].style.backgroundColor = "rgb(218, 206, 199)"; // Reset to default color
+        j++;
+        k++;
+    }
+}
+
+async function mergeSort(array, left, right) {
+    if (left < right) {
+        let middle = Math.floor((left + right) / 2);
+
+        await mergeSort(array, left, middle);
+        await mergeSort(array, middle + 1, right);
+        await merge(array, left, middle, right);
+    }
+
+    // After sorting, mark all elements as sorted
+    if (left === 0 && right === array.length - 1) {
+        resetArrayColor(array); // All elements are sorted
+    }
+}
+
+
+
+//QUICK SORT
+async function swap(array, leftIndex, rightIndex) {
+    var temp = array[leftIndex];
+    array[leftIndex] = array[rightIndex];
+    array[rightIndex] = temp;
+    // Update the DOM to reflect the swap
+    let bars = document.getElementsByClassName("bar");
+    bars[leftIndex].style.height = array[leftIndex] * heightFactor + "px";
+    bars[rightIndex].style.height = array[rightIndex] * heightFactor + "px";
+    bars[leftIndex].style.backgroundColor = "orange"; // Swapped elements
+    bars[rightIndex].style.backgroundColor = "orange"; // Swapped elements
+    await sleep(speedFactor);
+    bars[leftIndex].style.backgroundColor = "rgb(218, 206, 199)";
+    bars[rightIndex].style.backgroundColor = "rgb(218, 206, 199)";
+}
+
+async function partition(array, left, right) {
+    let bars = document.getElementsByClassName("bar");
+    var pivot = array[left]; // First element as pivot
+    bars[left].style.backgroundColor = "red"; // Pivot
+    var i = left + 1; // Left pointer
+    var j = right; // Right pointer
+
+    while (i <= j) {
+        while (i <= j && array[i] <= pivot) {
+            bars[i].style.backgroundColor = "yellow"; // Active comparison
+            await sleep(speedFactor);
+            bars[i].style.backgroundColor = "rgb(218, 206, 199)"; // Reset to default color
+            i++;
+        }
+        if (i <= j) {
+            bars[i].style.backgroundColor = "orange"; // Mark the stopping point
+        }
+        while (i <= j && array[j] >= pivot) {
+            bars[j].style.backgroundColor = "yellow"; // Active comparison
+            await sleep(speedFactor);
+            bars[j].style.backgroundColor = "rgb(218, 206, 199)"; // Reset to default color
+            j--;
+        }
+        if (i < j) {
+            await swap(array, i, j); // Swapping two elements
+            i++;
+            j--;
+        }
+    }
+
+    // Move pivot to its correct position
+    await swap(array, left, j);
+    bars[j].style.backgroundColor = "rgb(218, 206, 199)"; // Pivot in correct position
+
+    return j;
+}
+
+async function quickSort(array, left, right) {
+    if (left < right) {
+        let index = await partition(array, left, right); // Index returned from partition
+        if (left < index - 1) { // More elements on the left side of the pivot
+            await quickSort(array, left, index - 1);
+        }
+        if (index + 1 < right) { // More elements on the right side of the pivot
+            await quickSort(array, index + 1, right);
+        }
+    }
+
+    // After sorting, mark all elements as sorted
+    if (left === 0 && right === array.length - 1) {
+        resetArrayColor(array); // All elements are sorted
+    }
+}
+
 
 function resetArrayColor(array) {
     let bars = document.getElementsByClassName("bar");
@@ -134,21 +310,19 @@ sort_btn.addEventListener("click", function () {
                     "Merge Sort is not visualized properly. Do you want to continue?"
                 )
             ) {
-                mergeSort(unsorted_array);
+                mergeSort(unsorted_array,0,unsorted_array.length-1);
             } else {
                 break;
             }
-            //console.log(mergeSort(unsorted_array));
-            break;
-        case "heap":
-            HeapSort(unsorted_array);
             break;
         case "insertion":
             InsertionSort(unsorted_array);
             break;
         case "quick":
-            console.log(unsorted_array.length);
             quickSort(unsorted_array, 0, unsorted_array.length - 1);
+            break;
+        case "selection":
+            SelectionSort(unsorted_array);
             break;
         default:
             bubbleSort(unsorted_array);
